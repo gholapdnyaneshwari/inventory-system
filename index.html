@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Product Analysis</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <span class="logo" aria-hidden="true"></span><b>Inventory System</b>
+    <span class="sp"></span>
+    <button class="btn" id="addBtn" type="button">+ Add product</button>
+  </header>
+
+  <div>
+    <h1>Product Analysis</h1>
+    <p class="sub">Track your inventory, categories and totals in one place.</p>
+  </div>
+
+  <div class="tabs" id="tabs" role="tablist">
+    <button class="tab on" data-cat="All" type="button">All</button>
+    <button class="tab" data-cat="Budget" type="button">Budget</button>
+    <button class="tab" data-cat="Standard" type="button">Standard</button>
+    <button class="tab" data-cat="Premium" type="button">Premium</button>
+  </div>
+
+  <div class="grid">
+    <div class="stack">
+      <section class="card" aria-labelledby="pl">
+        <div class="head">
+          <h2 id="pl">Product List</h2><span class="sp"></span>
+          <input type="search" id="search" placeholder="Search product" aria-label="Search product">
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Product Name</th><th>Category</th><th>Price</th><th>Stock</th><th>Status</th></tr></thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+        <p class="msg" id="msg" role="status"></p>
+      </section>
+
+      <section class="card chart" aria-labelledby="ch">
+        <div class="head"><h2 id="ch">Price by Product</h2></div>
+        <svg id="line" aria-label="Price by product line chart"></svg>
+      </section>
+    </div>
+
+    <div class="stack side">
+      <section class="card" aria-labelledby="ca">
+        <div class="head"><h2 id="ca">Category Mix</h2></div>
+        <div class="donut">
+          <svg viewBox="0 0 100 100" id="donut" aria-label="Category distribution"></svg>
+          <div class="legend" id="legend"></div>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="fa">
+        <div class="head"><h2 id="fa">Financial Analytics</h2></div>
+        <div class="big" id="total">$0</div>
+        <div class="note" id="adjusted"></div>
+        <div class="row">
+          <label>Tax %<input type="number" id="tax" value="8" min="0" max="100" inputmode="decimal"></label>
+          <label>Discount %<input type="number" id="discount" value="10" min="0" max="100" inputmode="decimal"></label>
+        </div>
+        <h3>Affordable items (under $200)</h3>
+        <div class="chips" id="affordable"></div>
+        <h3>Formatted report</h3>
+        <div id="report"></div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<!-- Add product form -->
+<dialog id="dlg" aria-labelledby="dlgT">
+  <form id="addForm" novalidate>
+    <h2 id="dlgT">Add product</h2>
+    <label>Product name
+      <input id="fName" type="text" autocomplete="off" placeholder="e.g. Monitor">
+    </label>
+    <div class="two">
+      <label>Price ($)
+        <input id="fPrice" type="number" inputmode="decimal" min="0" step="any" placeholder="150">
+      </label>
+      <label>Stock
+        <input id="fStock" type="number" inputmode="numeric" min="0" step="1" value="10">
+      </label>
+    </div>
+    <p class="preview" id="preview">Category: -</p>
+    <p class="msg err" id="formErr" role="alert"></p>
+    <div class="actions">
+      <button type="button" class="ghost" id="cancelBtn">Cancel</button>
+      <button type="submit" class="btn">Add product</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="script.js"></script>
+</body>
+</html>
